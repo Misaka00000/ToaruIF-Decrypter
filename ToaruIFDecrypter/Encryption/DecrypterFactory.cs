@@ -52,13 +52,18 @@ namespace ToaruIFDecrypter.Encryption
             if (buff[0] == 0x53 && buff[1] == 0 && buff[2] == 0 && buff[3] == 0)
             {
                 buff = new byte[7];
+                long pre = -1;
                 while (stream.Position + 7 < stream.Length)
                 {
                     stream.Read(buff, 0, buff.Length);
                     stream.Seek(1 - buff.Length, SeekOrigin.Current);
                     if (Encoding.ASCII.GetString(buff) == "UnityFS")
-                        return new OffsetDecrypter(stream.Position - 1);
+                        pre = stream.Position - 1;
+                    if (pre > 0 && stream.Position - pre > 400)
+                        return new OffsetDecrypter(pre);
                 }
+                if (pre > 0)
+                    return new OffsetDecrypter(pre);
                 return null;
             }
 
