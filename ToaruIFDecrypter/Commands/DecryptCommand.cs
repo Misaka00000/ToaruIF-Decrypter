@@ -73,7 +73,7 @@ namespace ToaruIFDecrypter.Commands
                             ($"[{decrypter.GetType().Name}]", ConsoleColor.Green),
                             ($" -> \"{fileOutputPath}\"", null));
 
-                        using (var outFile = File.OpenWrite(fileOutputPath))
+                        using (var outFile = File.OpenWrite(outputDir.FullName + fileOutputPath))
                         {
                             decrypter.Decrypt(fs, outFile);
                         }
