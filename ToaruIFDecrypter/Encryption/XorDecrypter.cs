@@ -30,20 +30,15 @@ namespace ToaruIFDecrypter.Encryption
 
             if (ptr < 0)
             {
-                for (int i = 0; i < buffer.Length; i++)
-                {
-                    buffer[i] = (byte)(buffer[i] ^ Key[0]);
-                }
+                ptr = 0;
             }
-            else
+
+            for (int i = 0; i < buffer.Length; i++)
             {
-                for (int i = 0; i < buffer.Length; i++)
-                {
-                    buffer[i] = (byte)(buffer[i] ^ Key[ptr]);
-                    ptr++;
-                    if (ptr == len)
-                        ptr = 0;
-                }
+                buffer[i] = (byte)(buffer[i] ^ Key[ptr]);
+                ptr++;
+                if (ptr == len)
+                    ptr = 0;
             }
 
             output.Write(buffer, 0, buffer.Length);

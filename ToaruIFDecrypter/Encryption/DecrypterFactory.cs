@@ -59,7 +59,7 @@ namespace ToaruIFDecrypter.Encryption
                     stream.Seek(1 - buff.Length, SeekOrigin.Current);
                     if (Encoding.ASCII.GetString(buff) == "UnityFS")
                         pre = stream.Position - 1;
-                    if (pre > 0 && stream.Position - pre > 400)
+                    if (pre > 0 && stream.Position - pre > 1024)
                         return new OffsetDecrypter(pre);
                 }
                 if (pre > 0)
