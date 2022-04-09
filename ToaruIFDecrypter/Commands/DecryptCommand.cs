@@ -55,6 +55,40 @@ namespace ToaruIFDecrypter.Commands
 
             var factory = new DecrypterFactory(keysFile);
 
+            ProcessFiles(inputDir, outputDir, factory);
+
+            //var files = inputDir.GetFiles();
+            //for (var i = 0; i < files.Length; i++)
+            //{
+            //    var file = files[i];
+
+            //    ConsoleEx.Write($"\"{file.FullName}\"");
+
+            //    using (var fs = file.OpenRead())
+            //    {
+            //        var decrypter = factory.GetDecrypter(fs);
+            //        if (decrypter != null)
+            //        {
+            //            var fileOutputPath = Path.Combine(outputDir.FullName, file.FullName.Replace(inputDir.FullName, ""));
+
+            //            ConsoleEx.WriteLine(
+            //                ($"[{decrypter.GetType().Name}]", ConsoleColor.Green),
+            //                ($" -> \"{fileOutputPath}\"", null));
+
+            //            using (var outFile = File.OpenWrite(outputDir.FullName + fileOutputPath))
+            //            {
+            //                decrypter.Decrypt(fs, outFile);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            ConsoleEx.WriteLine(" [Skip]", ConsoleColor.Red);
+            //        }
+            //    }
+            //}
+        }
+        private static void ProcessFiles(DirectoryInfo inputDir, DirectoryInfo outputDir, DecrypterFactory factory)
+        {
             var files = inputDir.GetFiles();
             for (var i = 0; i < files.Length; i++)
             {
@@ -83,6 +117,12 @@ namespace ToaruIFDecrypter.Commands
                         ConsoleEx.WriteLine(" [Skip]", ConsoleColor.Red);
                     }
                 }
+            }
+            var dirs = inputDir.GetDirectories();
+            for (var i = 0; i < dirs.Length; i++)
+            {
+                var dirdeep = dirs[i];
+                ProcessFiles(dirs[i], outputDir, factory);
             }
         }
     }
