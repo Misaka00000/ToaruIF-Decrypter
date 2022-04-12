@@ -28,6 +28,11 @@ namespace ToaruIFDecrypter.Encryption
             byte[] buffer = new byte[input.Length];
             input.Read(buffer, 0, buffer.Length);
 
+            if (ptr < 0)
+            {
+                ptr = 0;
+            }
+
             for (int i = 0; i < buffer.Length; i++)
             {
                 buffer[i] = (byte)(buffer[i] ^ Key[ptr]);
