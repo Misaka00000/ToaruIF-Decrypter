@@ -8,7 +8,7 @@ namespace ToaruIFDecrypter.Encryption
 {
     public class DecrypterFactory
     {
-        private new Dictionary<int, byte[]> Keys;
+        public static Dictionary<int, byte[]> Keys;
 
         public DecrypterFactory(FileInfo keysFile)
         {

@@ -6,6 +6,10 @@ namespace ToaruIFDecrypter.Encryption
     {
         Stream Decrypt(Stream input);
 
+        byte[] GetKey();
+
+        void SetKey(byte[] key);
+
         void Decrypt(Stream input, Stream output);
     }
 }

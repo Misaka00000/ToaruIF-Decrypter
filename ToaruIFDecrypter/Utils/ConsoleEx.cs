@@ -94,5 +94,6 @@ namespace ToaruIFDecrypter.Utils
                 }
             }
         }
+        public static int Read() => Console.Read();
     }
 }
