@@ -11,6 +11,16 @@ namespace ToaruIFDecrypter.Encryption
             Offset = offset;
         }
 
+        public byte[] GetKey()
+        {
+            return new byte[]{ 0, 0, 0, 0 };
+        }
+
+        public void SetKey(byte[] key)
+        {
+            //什么也不处理
+        }
+
         public Stream Decrypt(Stream input)
         {
             MemoryStream ms = new MemoryStream((int)(input.Length - Offset));

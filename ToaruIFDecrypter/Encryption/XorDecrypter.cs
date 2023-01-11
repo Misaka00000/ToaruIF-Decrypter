@@ -11,6 +11,16 @@ namespace ToaruIFDecrypter.Encryption
             Key = key;
         }
 
+        public byte[] GetKey()
+        {
+            return Key;
+        }
+
+        public void SetKey(byte[] key)
+        {
+            Key = key;
+        }
+
         public Stream Decrypt(Stream input)
         {
             MemoryStream ms = new MemoryStream((int)input.Length);
@@ -27,6 +37,11 @@ namespace ToaruIFDecrypter.Encryption
 
             byte[] buffer = new byte[input.Length];
             input.Read(buffer, 0, buffer.Length);
+
+            if (ptr < 0)
+            {
+                ptr = 0;
+            }
 
             for (int i = 0; i < buffer.Length; i++)
             {
